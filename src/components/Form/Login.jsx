@@ -32,13 +32,21 @@ const Login = () => {
     <>
       <form onSubmit={handleLogin} method='post'>
         {error && <div>{error}</div>}
-        <label htmlFor='username'>Username:</label>
-        <input type='text' name='username' id='username' />
-        <label htmlFor='password'>Password:</label>
-        <input type='password' name='password' id='password' />
-        <button type='submit'>Register</button>
+        <div className='form-row'>
+          <label htmlFor='username'>Username:</label>
+          <input type='text' name='username' id='username' required />
+        </div>
+        <div className='form-row'>
+          <label htmlFor='password'>Password:</label>
+          <input type='password' name='password' id='password' required />
+        </div>
+
+        <div className='form-row'>
+          <button type='submit'>Log In</button>
+        </div>
       </form>
-      <div>
+
+      <div className='form-link'>
         Don&apos;t have an account, <Link to='/register'>Register</Link>
       </div>
     </>
