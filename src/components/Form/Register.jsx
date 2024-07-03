@@ -57,7 +57,13 @@ const Register = ({ token, setToken }) => {
   };
   return (
     <>
-      <form ref={formRef} onSubmit={handleRegister} method='post'>
+      <form
+        className='register-form'
+        ref={formRef}
+        onSubmit={handleRegister}
+        method='post'
+      >
+        <h3>Sign Up!</h3>
         <div className='form-row'>
           <label htmlFor='firstname'>First name:</label>
           <span className='field-error'></span>
@@ -89,7 +95,7 @@ const Register = ({ token, setToken }) => {
           <input type='password' name='cpassword' id='cpassword' required />
         </div>
 
-        <div className='form-row'>
+        <div className='form-button'>
           <button type='submit'>Register</button>
         </div>
       </form>

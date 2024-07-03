@@ -2,6 +2,7 @@ import { useState } from 'react';
 import URL from '../../url';
 import { Link, Navigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import './Login.css';
 const Login = ({ token, setToken }) => {
   const [error, setError] = useState(null);
 
@@ -37,8 +38,9 @@ const Login = ({ token, setToken }) => {
   };
   return (
     <>
-      <form onSubmit={handleLogin} method='post'>
-        {error && <div>{error}</div>}
+      <form className='login-form' onSubmit={handleLogin} method='post'>
+        {error && <div className='error'>{error}</div>}
+        <h3>Login!</h3>
         <div className='form-row'>
           <label htmlFor='username'>Username:</label>
           <input type='text' name='username' id='username' required />
@@ -48,7 +50,7 @@ const Login = ({ token, setToken }) => {
           <input type='password' name='password' id='password' required />
         </div>
 
-        <div className='form-row'>
+        <div className='form-button'>
           <button type='submit'>Log In</button>
         </div>
       </form>
