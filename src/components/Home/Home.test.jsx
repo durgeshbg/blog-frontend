@@ -1,10 +1,15 @@
 import { render } from '@testing-library/react';
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import Home from './Home';
 
+vi.mock('react-router-dom');
 describe('Home', () => {
-  it('mount:', () => {
+  it('Mount:', () => {
     const { container } = render(<Home />);
     expect(container).toBeInTheDocument();
+  });
+  it('Snapshot:', () => {
+    const { container } = render(<Home />);
+    expect(container).toMatchInlineSnapshot(`<div />`);
   });
 });
