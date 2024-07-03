@@ -1,8 +1,12 @@
 import { useRef } from 'react';
 import URL from '../../url';
-import { Link } from 'react-router-dom';
-const Register = () => {
+import { Link, Navigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
+const Register = ({ token, setToken }) => {
   const formRef = useRef(null);
+
+  if (token) return <Navigate to={'/home'} />;
+
   const handleRegister = (e) => {
     e.preventDefault();
 
@@ -42,6 +46,7 @@ const Register = () => {
         } else {
           // No errors user created
           localStorage.setItem('token', data.token);
+          setToken(localStorage.getItem('token'));
         }
       })
       .catch((err) => {
@@ -94,6 +99,11 @@ const Register = () => {
       </div>
     </>
   );
+};
+
+Register.propTypes = {
+  token: PropTypes.string,
+  setToken: PropTypes.func,
 };
 
 export default Register;

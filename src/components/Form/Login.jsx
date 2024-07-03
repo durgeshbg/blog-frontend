@@ -1,8 +1,12 @@
 import { useState } from 'react';
 import URL from '../../url';
-import { Link } from 'react-router-dom';
-const Login = () => {
+import { Link, Navigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
+const Login = ({ token, setToken }) => {
   const [error, setError] = useState(null);
+
+  if (token) return <Navigate to={'/home'} />;
+
   const handleLogin = (e) => {
     e.preventDefault();
 
@@ -20,7 +24,10 @@ const Login = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.error) setError(data.error.message);
-        else localStorage.setItem('token', data.token);
+        else {
+          localStorage.setItem('token', data.token);
+          setToken(localStorage.getItem('token'));
+        }
       })
       .catch((err) => {
         console.error(err);
@@ -51,6 +58,11 @@ const Login = () => {
       </div>
     </>
   );
+};
+
+Login.propTypes = {
+  token: PropTypes.string,
+  setToken: PropTypes.func,
 };
 
 export default Login;
