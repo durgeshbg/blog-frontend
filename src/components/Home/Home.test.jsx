@@ -10,6 +10,17 @@ describe('Home', () => {
   });
   it('Snapshot:', () => {
     const { container } = render(<Home />);
-    expect(container).toMatchInlineSnapshot(`<div />`);
+    expect(container).toMatchInlineSnapshot(`
+      <div>
+        <h2>
+          Posts
+        </h2>
+        <div
+          class="posts"
+        >
+           
+        </div>
+      </div>
+    `);
   });
 });
