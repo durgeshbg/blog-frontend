@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import URL from '../../url';
+import URL from '../../utils/url';
 import { Link, Navigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './Login.css';
