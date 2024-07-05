@@ -1,0 +1,27 @@
+.post {
+  color: white;
+  text-decoration: none;
+}
+.post > div {
+  background-color: var(--rebecca-purple);
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  height: 100px;
+  padding: 10px;
+  justify-content: center;
+
+}
+.post > div:hover {
+  background-color: var(--medium-slate-blue);
+}
+.post div {
+  margin-bottom: 10px;
+}
+.post .body {
+  text-overflow: ellipsis;
+  width: 280px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
