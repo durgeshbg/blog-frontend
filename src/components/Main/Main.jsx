@@ -4,6 +4,7 @@ import Register from '../Form/Register';
 import Home from '../Home/Home';
 import Error from '../Error/Error';
 import PropTypes from 'prop-types';
+import './Main.css';
 import PostDisplay from '../PostDisplay/PostDisplay';
 
 const Main = ({ token, setToken }) => {
