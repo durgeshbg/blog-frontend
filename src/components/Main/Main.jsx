@@ -4,9 +4,11 @@ import Register from '../Form/Register';
 import Home from '../Home/Home';
 import Error from '../Error/Error';
 import PropTypes from 'prop-types';
+import PostDisplay from '../PostDisplay/PostDisplay';
 
 const Main = ({ token, setToken }) => {
   const { path } = useParams();
+  const IS_OBJECT_ID = /^[0-9a-fA-F]{24}$/.test(path);
   return (
     <>
       <main>
@@ -16,6 +18,8 @@ const Main = ({ token, setToken }) => {
           <Register setToken={setToken} token={token} />
         ) : path === 'home' || path === undefined ? (
           <Home token={token} />
+        ) : IS_OBJECT_ID ? (
+          <PostDisplay id={path} />
         ) : (
           <Error />
         )}
