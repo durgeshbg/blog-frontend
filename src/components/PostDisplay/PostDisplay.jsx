@@ -37,6 +37,7 @@ const PostDisplay = ({ id, token }) => {
       fetchData();
     }
   }, [id, token]);
+
   return (
     <>
       {!token && <Navigate to={'/login'} />}
@@ -49,15 +50,20 @@ const PostDisplay = ({ id, token }) => {
           </div>
           <div className='comments'>
             <h3>Comments: </h3>
-            {comments.map((comment) => {
-              return (
-                <div key={comment._id} className='comment'>
-                  <div className='text'>{comment.text}</div>
-                  <div className='username'>@{comment.username}</div>
-                  <div className='time'>{distance(new Date(comment.updatedAt))}</div>
-                </div>
-              );
-            })}
+            {comments &&
+              (typeof comments === 'object' ? (
+                comments.map((comment) => {
+                  return (
+                    <div key={comment._id} className='comment'>
+                      <div className='text'>{comment.text}</div>
+                      <div className='username'>@{comment.username}</div>
+                      <div className='time'>{distance(new Date(comment.updatedAt))}</div>
+                    </div>
+                  );
+                })
+              ) : (
+                <div>No comments</div>
+              ))}
           </div>
         </div>
       )}
