@@ -27,6 +27,7 @@ const Login = ({ token, setToken }) => {
         if (data.error) setError(data.error.message);
         else {
           localStorage.setItem('token', data.token);
+          localStorage.setItem('admin', data.admin);
           setToken(localStorage.getItem('token'));
         }
       })

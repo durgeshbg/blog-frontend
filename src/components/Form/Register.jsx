@@ -46,6 +46,7 @@ const Register = ({ token, setToken }) => {
         } else {
           // No errors user created
           localStorage.setItem('token', data.token);
+          localStorage.setItem('admin', data.admin);
           setToken(localStorage.getItem('token'));
         }
       })
