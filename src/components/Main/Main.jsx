@@ -6,6 +6,7 @@ import Error from '../Error/Error';
 import PropTypes from 'prop-types';
 import './Main.css';
 import PostDisplay from '../PostDisplay/PostDisplay';
+import PostForm from '../Form/PostForm';
 
 const Main = ({ token, setToken }) => {
   const { path } = useParams();
@@ -19,8 +20,10 @@ const Main = ({ token, setToken }) => {
           <Register setToken={setToken} token={token} />
         ) : path === 'home' || path === undefined ? (
           <Home token={token} />
+        ) : path === 'create' ? (
+          <PostForm token={token} />
         ) : IS_OBJECT_ID ? (
-          <PostDisplay id={path} />
+          <PostDisplay id={path} token={token} />
         ) : (
           <Error />
         )}
