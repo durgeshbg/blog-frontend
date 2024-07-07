@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
-import Main from '../Main/Main';
+import { Outlet } from 'react-router-dom';
+import './App.css';
 
 const App = () => {
   const [token, setToken] = useState(localStorage.getItem('token'));
@@ -9,7 +10,9 @@ const App = () => {
   return (
     <>
       <Header token={token} setToken={setToken} />
-      <Main token={token} setToken={setToken} />
+      <main>
+        <Outlet context={[token, setToken]} />
+      </main>
       <Footer />
     </>
   );

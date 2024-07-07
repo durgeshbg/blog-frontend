@@ -6,7 +6,7 @@ import './Post.css';
 const Post = ({ post }) => {
   const createdTime = new Date(post.createdAt);
   return (
-    <Link className='post' to={post._id}>
+    <Link className='post' to={'/posts/' + post._id}>
       <div>
         <div className='title'>{post.title}</div>
         <div className='body'>{post.body}</div>

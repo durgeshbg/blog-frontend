@@ -1,10 +1,11 @@
-import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import URL from '../../utils/url';
 import distance from '../../utils/time_distance';
-import { Navigate } from 'react-router-dom';
+import { Link, Navigate, useOutletContext, useParams } from 'react-router-dom';
 
-const PostDisplay = ({ id, token }) => {
+const PostDisplay = () => {
+  const [token] = useOutletContext();
+  const { id } = useParams();
   const [post, setPost] = useState(null);
   const [comments, setComments] = useState(null);
 
@@ -12,6 +13,7 @@ const PostDisplay = ({ id, token }) => {
     async function fetchData() {
       try {
         const [postData, commentsData] = await Promise.all([
+          // Fetch Posts
           fetch(URL + '/posts/' + id, {
             method: 'GET',
             headers: {
@@ -19,6 +21,7 @@ const PostDisplay = ({ id, token }) => {
               Authorization: `Bearer ${token}`,
             },
           }).then((res) => res.json()),
+          // Fetch Comments
           fetch(URL + '/posts/' + id + '/comments', {
             method: 'GET',
             headers: {
@@ -27,6 +30,7 @@ const PostDisplay = ({ id, token }) => {
             },
           }).then((res) => res.json()),
         ]);
+        // Set Post and Comment state
         setPost(postData['post']);
         setComments(commentsData['comments']);
       } catch (err) {
@@ -42,11 +46,14 @@ const PostDisplay = ({ id, token }) => {
     <>
       {!token && <Navigate to={'/login'} />}
       {post && (
-        <div className='post-display'>
-          <div className='post'>
+        <div className='container'>
+          <div className='post-display'>
             <h1>{post.title}</h1>
-            <p>{post.body}</p>
-            <p>Posted: {distance(new Date(post.updatedAt))}</p>
+            <div>{post.body}</div>
+            <div>Posted: {distance(new Date(post.updatedAt))}</div>
+            {localStorage.getItem('admin') === 'true' && (
+              <Link to={'/posts/' + id + '/update'}>Update</Link>
+            )}
           </div>
           <div className='comments'>
             <h3>Comments: </h3>
@@ -69,11 +76,6 @@ const PostDisplay = ({ id, token }) => {
       )}
     </>
   );
-};
-
-PostDisplay.propTypes = {
-  id: PropTypes.string.isRequired,
-  token: PropTypes.string.isRequired,
 };
 
 export default PostDisplay;

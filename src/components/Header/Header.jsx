@@ -8,7 +8,7 @@ const Header = ({ token, setToken }) => {
       <nav>
         <ul>
           <li>
-            <Link to='/home'>Home</Link>
+            <Link to='/'>Home</Link>
           </li>
           <li>
             {token ? (

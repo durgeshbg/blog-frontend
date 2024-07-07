@@ -1,12 +1,12 @@
-import { Navigate } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import { Navigate, useOutletContext } from 'react-router-dom';
 import './Home.css';
 import { useEffect, useState } from 'react';
 import URL from '../../utils/url';
 import Post from '../Post/Post';
 
-const Home = ({ token }) => {
+const Home = () => {
   const [posts, setPosts] = useState(null);
+  const [token] = useOutletContext();
 
   useEffect(() => {
     if (token) {
@@ -22,19 +22,16 @@ const Home = ({ token }) => {
     }
   }, [token]);
 
+  if (!token) <Navigate to={'/login'} />;
+
   return (
     <>
-      {!token && <Navigate to={'/login'} />}
       <h2>Posts</h2>
       <div className='posts'>
         {posts && posts.map((post) => <Post key={post._id} post={post} />)}
       </div>
     </>
   );
-};
-
-Home.propTypes = {
-  token: PropTypes.string,
 };
 
 export default Home;

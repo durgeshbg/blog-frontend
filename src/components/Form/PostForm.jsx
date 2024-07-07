@@ -1,16 +1,14 @@
 import { useRef } from 'react';
 import URL from '../../utils/url';
-import { Navigate, useNavigate } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import { Navigate, useNavigate, useOutletContext } from 'react-router-dom';
 
-const PostForm = ({ token }) => {
+const PostForm = () => {
   const formRef = useRef(null);
   const navigate = useNavigate();
-
-  if (!token || localStorage.getItem('admin') === 'false')
-    return <Navigate to={'/home'} />;
+  const [token] = useOutletContext();
 
   const handleSubmit = (e) => {
+    // Prevent Form submission
     e.preventDefault();
 
     const data = new FormData(e.target);
@@ -32,6 +30,7 @@ const PostForm = ({ token }) => {
         formRef.current
           .querySelectorAll('.field-error')
           .forEach((span) => (span.textContent = ''));
+        // Check for errors
         if (data.errors) {
           data.errors.forEach((error) => {
             const errorInput = formRef.current.querySelector(
@@ -44,15 +43,18 @@ const PostForm = ({ token }) => {
           });
         } else {
           // No errors user created
-          navigate('/home');
+          navigate('/posts/' + data.post._id);
         }
       })
       .catch((err) => {
         console.error(err);
       });
-
+    // Reset Form
     e.target.reset();
   };
+
+  if (!token || localStorage.getItem('admin') === 'false') return <Navigate to={'/'} />;
+
   return (
     <>
       <form className='register-form' ref={formRef} onSubmit={handleSubmit} method='post'>
@@ -74,8 +76,5 @@ const PostForm = ({ token }) => {
       </form>
     </>
   );
-};
-PostForm.propTypes = {
-  token: PropTypes.string,
 };
 export default PostForm;

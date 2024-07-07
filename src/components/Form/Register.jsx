@@ -1,13 +1,12 @@
 import { useRef } from 'react';
 import URL from '../../utils/url';
-import { Link, Navigate } from 'react-router-dom';
-import PropTypes from 'prop-types';
-const Register = ({ token, setToken }) => {
+import { Link, Navigate, useOutletContext } from 'react-router-dom';
+const Register = () => {
   const formRef = useRef(null);
-
-  if (token) return <Navigate to={'/home'} />;
+  const [token, setToken] = useOutletContext();
 
   const handleRegister = (e) => {
+    // Prevent Form submission
     e.preventDefault();
 
     const data = new FormData(e.target);
@@ -32,7 +31,7 @@ const Register = ({ token, setToken }) => {
         formRef.current
           .querySelectorAll('.field-error')
           .forEach((span) => (span.textContent = ''));
-
+        // Check for errors
         if (data.errors) {
           data.errors.forEach((error) => {
             const errorInput = formRef.current.querySelector(
@@ -53,9 +52,10 @@ const Register = ({ token, setToken }) => {
       .catch((err) => {
         console.error(err);
       });
-
+    // Reset Form
     e.target.reset();
   };
+  if (token) return <Navigate to={'/'} />;
   return (
     <>
       <form
@@ -106,11 +106,6 @@ const Register = ({ token, setToken }) => {
       </div>
     </>
   );
-};
-
-Register.propTypes = {
-  token: PropTypes.string,
-  setToken: PropTypes.func,
 };
 
 export default Register;

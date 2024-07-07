@@ -1,18 +1,17 @@
 import { useState } from 'react';
 import URL from '../../utils/url';
-import { Link, Navigate } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import { Link, Navigate, useOutletContext } from 'react-router-dom';
 import './Login.css';
-const Login = ({ token, setToken }) => {
+const Login = () => {
   const [error, setError] = useState(null);
-
-  if (token) return <Navigate to={'/home'} />;
+  const [token, setToken] = useOutletContext();
 
   const handleLogin = (e) => {
     e.preventDefault();
-
+    // Prevent Form submission
     const data = new FormData(e.target);
     fetch(URL + '/users/login', {
+      // Sending data
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -24,19 +23,24 @@ const Login = ({ token, setToken }) => {
     })
       .then((res) => res.json())
       .then((data) => {
+        // If errors
         if (data.error) setError(data.error.message);
         else {
           localStorage.setItem('token', data.token);
           localStorage.setItem('admin', data.admin);
           setToken(localStorage.getItem('token'));
+          setError(null);
         }
       })
       .catch((err) => {
         console.error(err);
       });
-
+    // Reset errors
     e.target.reset();
   };
+
+  if (token) return <Navigate to={'/'} />;
+
   return (
     <>
       <form className='login-form' onSubmit={handleLogin} method='post'>
@@ -61,11 +65,6 @@ const Login = ({ token, setToken }) => {
       </div>
     </>
   );
-};
-
-Login.propTypes = {
-  token: PropTypes.string,
-  setToken: PropTypes.func,
 };
 
 export default Login;
