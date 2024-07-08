@@ -1,13 +1,24 @@
 import { useEffect, useState } from 'react';
 import URL from '../../utils/url';
 import distance from '../../utils/time_distance';
-import { Link, Navigate, useOutletContext, useParams } from 'react-router-dom';
+import { Link, useNavigate, useOutletContext, useParams } from 'react-router-dom';
 
 const PostDisplay = () => {
   const [token] = useOutletContext();
   const { id } = useParams();
   const [post, setPost] = useState(null);
   const [comments, setComments] = useState(null);
+  const [confirm, setConfirm] = useState(false);
+  const navigate = useNavigate();
+
+  const handleDelete = () => {
+    fetch(URL + '/posts/' + id, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }).then(() => navigate('/'));
+  };
 
   useEffect(() => {
     async function fetchData() {
@@ -42,17 +53,35 @@ const PostDisplay = () => {
     }
   }, [id, token]);
 
+  if (!token) navigate('/login');
+
   return (
     <>
-      {!token && <Navigate to={'/login'} />}
       {post && (
         <div className='container'>
           <div className='post-display'>
             <h1>{post.title}</h1>
             <div>{post.body}</div>
-            <div>Posted: {distance(new Date(post.updatedAt))}</div>
+            <div>Posted: {distance(new Date(post.createdAt))}</div>
             {localStorage.getItem('admin') === 'true' && (
-              <Link to={'/posts/' + id + '/update'}>Update</Link>
+              <div>
+                <div className='update-btn'>
+                  <Link to={'/posts/' + id + '/update'}>Update</Link>
+                </div>
+                <div className='delete-btn'>
+                  <button onClick={() => setConfirm(true)}>Delete</button>
+                </div>
+
+                <div className='delete-btn'>
+                  {confirm && (
+                    <>
+                      <div className='question'>Would you like to really delete?</div>
+                      <button onClick={handleDelete}>Yes</button>
+                      <button onClick={() => setConfirm(false)}>No</button>
+                    </>
+                  )}
+                </div>
+              </div>
             )}
           </div>
           <div className='comments'>

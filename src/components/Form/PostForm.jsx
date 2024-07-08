@@ -88,7 +88,7 @@ const PostForm = () => {
         </div>
 
         <div className='form-button'>
-          <button type='submit'>Create</button>
+          <button type='submit'>{id ? 'Update' : 'Create'}</button>
         </div>
       </form>
     </>
