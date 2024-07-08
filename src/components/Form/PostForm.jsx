@@ -1,20 +1,36 @@
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import URL from '../../utils/url';
-import { Navigate, useNavigate, useOutletContext } from 'react-router-dom';
+import { Navigate, useNavigate, useOutletContext, useParams } from 'react-router-dom';
 
 const PostForm = () => {
   const formRef = useRef(null);
   const navigate = useNavigate();
   const [token] = useOutletContext();
+  const { id } = useParams();
+
+  useEffect(() => {
+    if (id) {
+      fetch(URL + '/posts/' + id, {
+        headers: {
+          Authorization: `Bearer  ${token}`,
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          formRef.current.querySelector('#title').value = data.post.title;
+          formRef.current.querySelector('#body').value = data.post.body;
+        });
+    }
+  }, [id, token]);
 
   const handleSubmit = (e) => {
     // Prevent Form submission
     e.preventDefault();
 
     const data = new FormData(e.target);
-    fetch(URL + '/posts', {
+    fetch(URL + '/posts' + (id ? `/${id}` : ''), {
       // Sending data
-      method: 'POST',
+      method: id ? 'PUT' : 'POST',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
@@ -43,6 +59,7 @@ const PostForm = () => {
           });
         } else {
           // No errors user created
+          console.log(data);
           navigate('/posts/' + data.post._id);
         }
       })
