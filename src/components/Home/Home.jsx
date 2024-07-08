@@ -28,7 +28,10 @@ const Home = () => {
     <>
       <h2>Posts</h2>
       <div className='posts'>
-        {posts && posts.map((post) => <Post key={post._id} post={post} />)}
+        {posts &&
+          (typeof posts === 'object'
+            ? posts.map((post) => <Post key={post._id} post={post} />)
+            : 'No posts to display')}
       </div>
     </>
   );
