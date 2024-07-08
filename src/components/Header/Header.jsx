@@ -12,8 +12,7 @@ const Header = ({ token, setToken }) => {
           </li>
           <li>
             {token ? (
-              <Link
-                to='/login'
+              <button
                 onClick={() => {
                   localStorage.removeItem('token');
                   localStorage.removeItem('admin');
@@ -21,7 +20,7 @@ const Header = ({ token, setToken }) => {
                 }}
               >
                 Logout
-              </Link>
+              </button>
             ) : (
               <Link to='/login'>LogIn/SignUp</Link>
             )}
