@@ -22,7 +22,7 @@ const Home = () => {
     }
   }, [token]);
 
-  if (!token) <Navigate to={'/login'} />;
+  if (!token) return <Navigate to={'/login'} />;
 
   return (
     <>
