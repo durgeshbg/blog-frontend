@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import URL from '../../utils/url';
 import distance from '../../utils/time_distance';
 import { Link, useNavigate, useOutletContext, useParams } from 'react-router-dom';
+import Comment from '../Comment/Comment';
 
 const PostDisplay = () => {
   const [token] = useOutletContext();
@@ -88,15 +89,9 @@ const PostDisplay = () => {
             <h3>Comments: </h3>
             {comments &&
               (typeof comments === 'object' ? (
-                comments.map((comment) => {
-                  return (
-                    <div key={comment._id} className='comment'>
-                      <div className='text'>{comment.text}</div>
-                      <div className='username'>@{comment.username}</div>
-                      <div className='time'>{distance(new Date(comment.updatedAt))}</div>
-                    </div>
-                  );
-                })
+                comments.map((comment) => (
+                  <Comment key={comment._id} token={token} comment={comment} />
+                ))
               ) : (
                 <div>No comments</div>
               ))}
