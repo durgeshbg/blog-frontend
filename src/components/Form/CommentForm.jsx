@@ -52,6 +52,7 @@ const CommentForm = ({ comment, postId, setUpdateform, updateComments, token }) 
           <input type='text' id='text' name='text' required />
         </div>
         <button type='submit'>{comment ? 'Save' : 'Post'}</button>
+        {comment && <button onClick={() => setUpdateform(false)}>Cancel</button>}
       </form>
     </>
   );
