@@ -9,7 +9,7 @@ const PostDisplay = () => {
   const [token] = useOutletContext();
   const { id } = useParams();
   const [post, setPost] = useState(null);
-  const [comments, setComments] = useState(null);
+  const [comments, setComments] = useState([]);
   const [confirm, setConfirm] = useState(false);
   const navigate = useNavigate();
 
@@ -54,7 +54,11 @@ const PostDisplay = () => {
         ]);
         // Set Post and Comment state
         setPost(postData['post']);
-        setComments(commentsData['comments']);
+        if (typeof commentsData['comments'] === 'object') {
+          setComments(commentsData['comments']);
+        } else {
+          setComments([]);
+        }
       } catch (err) {
         console.error(err);
       }
@@ -106,7 +110,7 @@ const PostDisplay = () => {
             </div>
             <div className='comments'>
               {comments &&
-                (typeof comments === 'object'
+                (comments.length > 0
                   ? comments.map((comment) => (
                       <Comment
                         updateComments={updateComments}
