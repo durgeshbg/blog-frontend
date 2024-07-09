@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import URL from '../../utils/url';
 import distance from '../../utils/time_distance';
-import { Link, useNavigate, useOutletContext, useParams } from 'react-router-dom';
+import { useNavigate, useOutletContext, useParams } from 'react-router-dom';
 import Comment from '../Comment/Comment';
 import CommentForm from '../Form/CommentForm';
+import PostForm from '../Form/PostForm';
 
 const PostDisplay = () => {
   const [token] = useOutletContext();
@@ -11,6 +12,7 @@ const PostDisplay = () => {
   const [post, setPost] = useState(null);
   const [comments, setComments] = useState(null);
   const [confirm, setConfirm] = useState(false);
+  const [updateForm, setUpdateForm] = useState(false);
   const navigate = useNavigate();
 
   const handleDelete = () => {
@@ -70,31 +72,40 @@ const PostDisplay = () => {
     <>
       {post && (
         <div>
-          <div>
-            <h1>{post.title}</h1>
-            <div>{post.body}</div>
-            <div>Posted: {distance(new Date(post.createdAt))}</div>
-            {localStorage.getItem('admin') === 'true' && (
-              <div>
+          {updateForm ? (
+            <PostForm
+              setPost={setPost}
+              setUpdateForm={setUpdateForm}
+              tokenFromUpdate={token}
+              post={post}
+            />
+          ) : (
+            <div>
+              <h1>{post.title}</h1>
+              <div>{post.body}</div>
+              <div>Posted: {distance(new Date(post.createdAt))}</div>
+              {localStorage.getItem('admin') === 'true' && (
                 <div>
-                  <Link to={'/posts/' + id + '/update'}>Update</Link>
-                </div>
-                <div>
-                  <button onClick={() => setConfirm(true)}>Delete</button>
-                </div>
+                  <div>
+                    <button onClick={() => setUpdateForm(true)}>Update</button>
+                  </div>
+                  <div>
+                    <button onClick={() => setConfirm(true)}>Delete</button>
+                  </div>
 
-                <div>
-                  {confirm && (
-                    <>
-                      <div>Would you like to really delete?</div>
-                      <button onClick={handleDelete}>Yes</button>
-                      <button onClick={() => setConfirm(false)}>No</button>
-                    </>
-                  )}
+                  <div>
+                    {confirm && (
+                      <>
+                        <div>Would you like to really delete?</div>
+                        <button onClick={handleDelete}>Yes</button>
+                        <button onClick={() => setConfirm(false)}>No</button>
+                      </>
+                    )}
+                  </div>
                 </div>
-              </div>
-            )}
-          </div>
+              )}
+            </div>
+          )}
           <div className='comments'>
             <h3>Comments: </h3>
             <div>

@@ -1,39 +1,31 @@
 import { useEffect, useRef } from 'react';
 import URL from '../../utils/url';
-import { Navigate, useNavigate, useOutletContext, useParams } from 'react-router-dom';
+import { Navigate, useNavigate, useOutletContext } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-const PostForm = () => {
+const PostForm = ({ setPost, setUpdateForm, tokenFromUpdate, post }) => {
   const formRef = useRef(null);
   const navigate = useNavigate();
   const [token] = useOutletContext();
-  const { id } = useParams();
 
   useEffect(() => {
-    if (id) {
-      fetch(URL + '/posts/' + id, {
-        headers: {
-          Authorization: `Bearer  ${token}`,
-        },
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          formRef.current.querySelector('#title').value = data.post.title;
-          formRef.current.querySelector('#body').value = data.post.body;
-        });
+    if (post) {
+      formRef.current.querySelector('#title').value = post.title;
+      formRef.current.querySelector('#body').value = post.body;
     }
-  }, [id, token]);
+  }, [post]);
 
   const handleSubmit = (e) => {
     // Prevent Form submission
     e.preventDefault();
 
     const data = new FormData(e.target);
-    fetch(URL + '/posts' + (id ? `/${id}` : ''), {
+    fetch(URL + '/posts' + (post ? `/${post._id}` : ''), {
       // Sending data
-      method: id ? 'PUT' : 'POST',
+      method: post ? 'PUT' : 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${!token ? tokenFromUpdate : token}`,
       },
       body: JSON.stringify({
         title: data.get('title'),
@@ -59,7 +51,12 @@ const PostForm = () => {
           });
         } else {
           // No errors user created
-          navigate('/posts/' + data.post._id);
+          if (post) {
+            setUpdateForm(false);
+            setPost(data.post);
+          } else {
+            navigate('/posts/' + data.post._id);
+          }
         }
       })
       .catch((err) => {
@@ -87,10 +84,23 @@ const PostForm = () => {
         </div>
 
         <div>
-          <button type='submit'>{id ? 'Update' : 'Create'}</button>
+          <button type='submit'>{post ? 'Update' : 'Create'}</button>
+          {post && <button onClick={() => setUpdateForm(false)}>Cancel</button>}
         </div>
       </form>
     </>
   );
 };
+
+PostForm.propTypes = {
+  setPost: PropTypes.func,
+  setUpdateForm: PropTypes.func,
+  tokenFromUpdate: PropTypes.string,
+  post: PropTypes.shape({
+    _id: PropTypes.string,
+    title: PropTypes.string,
+    body: PropTypes.string,
+  }),
+};
+
 export default PostForm;
