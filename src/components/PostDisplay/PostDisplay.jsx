@@ -21,6 +21,15 @@ const PostDisplay = () => {
     }).then(() => navigate('/'));
   };
 
+  const updateComments = (comment, type) => {
+    const filteredComments = comments.filter((c) => comment._id !== c._id);
+    if (type === 'update') {
+      setComments([{ ...comment, author: true }, ...filteredComments]);
+    } else if (type === 'delete') {
+      setComments(filteredComments);
+    }
+  };
+
   useEffect(() => {
     async function fetchData() {
       try {
@@ -90,7 +99,12 @@ const PostDisplay = () => {
             {comments &&
               (typeof comments === 'object' ? (
                 comments.map((comment) => (
-                  <Comment key={comment._id} token={token} comment={comment} />
+                  <Comment
+                    updateComments={updateComments}
+                    key={comment._id}
+                    token={token}
+                    comment={comment}
+                  />
                 ))
               ) : (
                 <div>No comments</div>
