@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import distance from '../../utils/time_distance';
 import { Link } from 'react-router-dom';
-import './Post.css';
 
 const Post = ({ post }) => {
   const createdTime = new Date(post.createdAt);

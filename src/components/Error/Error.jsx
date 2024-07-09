@@ -1,4 +1,3 @@
-import './Error.css';
 import PropTypes from 'prop-types';
 
 const Error = ({ status = 404, message = 'Page not found' }) => {

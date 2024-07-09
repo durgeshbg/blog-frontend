@@ -1,5 +1,4 @@
 import { Navigate, useOutletContext } from 'react-router-dom';
-import './Home.css';
 import { useEffect, useState } from 'react';
 import URL from '../../utils/url';
 import Post from '../Post/Post';

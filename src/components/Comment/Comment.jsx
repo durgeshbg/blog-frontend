@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import distance from '../../utils/time_distance';
-import './Comment.css';
 import URL from '../../utils/url';
 import { useState } from 'react';
 import CommentForm from '../Form/CommentForm';

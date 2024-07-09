@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import URL from '../../utils/url';
 import { Link, Navigate, useOutletContext } from 'react-router-dom';
-import './Login.css';
 const Login = () => {
   const [error, setError] = useState(null);
   const [token, setToken] = useOutletContext();
