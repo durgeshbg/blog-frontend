@@ -69,24 +69,24 @@ const PostDisplay = () => {
   return (
     <>
       {post && (
-        <div className='container'>
-          <div className='post-display'>
+        <div>
+          <div>
             <h1>{post.title}</h1>
             <div>{post.body}</div>
             <div>Posted: {distance(new Date(post.createdAt))}</div>
             {localStorage.getItem('admin') === 'true' && (
               <div>
-                <div className='update-btn'>
+                <div>
                   <Link to={'/posts/' + id + '/update'}>Update</Link>
                 </div>
-                <div className='delete-btn'>
+                <div>
                   <button onClick={() => setConfirm(true)}>Delete</button>
                 </div>
 
-                <div className='delete-btn'>
+                <div>
                   {confirm && (
                     <>
-                      <div className='question'>Would you like to really delete?</div>
+                      <div>Would you like to really delete?</div>
                       <button onClick={handleDelete}>Yes</button>
                       <button onClick={() => setConfirm(false)}>No</button>
                     </>
@@ -97,7 +97,7 @@ const PostDisplay = () => {
           </div>
           <div className='comments'>
             <h3>Comments: </h3>
-            <div className='comment-form'>
+            <div>
               <CommentForm
                 postId={post._id}
                 updateComments={updateComments}

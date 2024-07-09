@@ -43,23 +43,23 @@ const Login = () => {
   return (
     <>
       <form className='login-form' onSubmit={handleLogin} method='post'>
-        {error && <div className='error'>{error}</div>}
         <h3>Login!</h3>
-        <div className='form-row'>
+        {error && <div>{error}</div>}
+        <div>
           <label htmlFor='username'>Username:</label>
           <input type='text' name='username' id='username' required />
         </div>
-        <div className='form-row'>
+        <div>
           <label htmlFor='password'>Password:</label>
           <input type='password' name='password' id='password' required />
         </div>
 
-        <div className='form-button'>
+        <div>
           <button type='submit'>Log In</button>
         </div>
       </form>
 
-      <div className='form-link'>
+      <div>
         Don&apos;t have an account, <Link to='/register'>Register</Link>
       </div>
     </>

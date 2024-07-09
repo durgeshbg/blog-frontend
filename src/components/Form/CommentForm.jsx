@@ -26,10 +26,10 @@ const CommentForm = ({ comment, postId, setUpdateform, updateComments, token }) 
     })
       .then((res) => res.json())
       .then((data) => {
-        formRef.current.querySelector(`label[for='text'] + span`).textContent = '';
+        formRef.current.querySelector(`label[for='text'] + div`).textContent = '';
 
         if (data.errors) {
-          formRef.current.querySelector(`label[for='text'] + span`).textContent =
+          formRef.current.querySelector(`label[for='text'] + div`).textContent =
             data.errors[0].msg;
           formRef.current.querySelector(`#text`).value = data.comment.text;
         } else {
@@ -48,8 +48,8 @@ const CommentForm = ({ comment, postId, setUpdateform, updateComments, token }) 
       <form ref={formRef} onSubmit={handleSubmit} method='post'>
         <div>
           <label htmlFor='text'>Comment: </label>
-          <span></span>
-          <input type='text' id='text' name='text' />
+          <div></div>
+          <input type='text' id='text' name='text' required />
         </div>
         <button type='submit'>{comment ? 'Save' : 'Post'}</button>
       </form>

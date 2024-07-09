@@ -29,13 +29,13 @@ const Register = () => {
       .then((data) => {
         // Reset errors
         formRef.current
-          .querySelectorAll('.field-error')
+          .querySelectorAll('label + div')
           .forEach((span) => (span.textContent = ''));
         // Check for errors
         if (data.errors) {
           data.errors.forEach((error) => {
             const errorInput = formRef.current.querySelector(
-              `label[for=${error.path}] + .field-error`
+              `label[for=${error.path}] + div`
             );
             errorInput.textContent = error.msg;
           });
@@ -58,41 +58,36 @@ const Register = () => {
   if (token) return <Navigate to={'/'} />;
   return (
     <>
-      <form
-        className='register-form'
-        ref={formRef}
-        onSubmit={handleRegister}
-        method='post'
-      >
+      <form ref={formRef} onSubmit={handleRegister} method='post'>
         <h3>Sign Up!</h3>
-        <div className='form-row'>
+        <div>
           <label htmlFor='firstname'>First name:</label>
-          <span className='field-error'></span>
+          <div></div>
           <input type='text' name='firstname' id='firstname' required />
         </div>
-        <div className='form-row'>
+        <div>
           <label htmlFor='lastname'>Last name:</label>
-          <span className='field-error'></span>
+          <div></div>
           <input type='text' name='lastname' id='lastname' required />
         </div>
-        <div className='form-row'>
+        <div>
           <label htmlFor='email'>Email:</label>
-          <span className='field-error'></span>
+          <div></div>
           <input type='email' name='email' id='email' required />
         </div>
-        <div className='form-row'>
+        <div>
           <label htmlFor='username'>Username:</label>
-          <span className='field-error'></span>
+          <div></div>
           <input type='text' name='username' id='username' required />
         </div>
-        <div className='form-row'>
+        <div>
           <label htmlFor='password'>Password:</label>
-          <span className='field-error'></span>
+          <div></div>
           <input type='password' name='password' id='password' required />
         </div>
-        <div className='form-row'>
+        <div>
           <label htmlFor='cpassword'>Confirm Password:</label>
-          <span className='field-error'></span>
+          <div></div>
           <input type='password' name='cpassword' id='cpassword' required />
         </div>
 
@@ -101,7 +96,7 @@ const Register = () => {
         </div>
       </form>
 
-      <div className='form-link'>
+      <div>
         Already have an account, <Link to='/login'>Login</Link>
       </div>
     </>

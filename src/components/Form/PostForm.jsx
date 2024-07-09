@@ -44,13 +44,13 @@ const PostForm = () => {
       .then((data) => {
         // Reset errors
         formRef.current
-          .querySelectorAll('.field-error')
-          .forEach((span) => (span.textContent = ''));
+          .querySelectorAll('label + div')
+          .forEach((div) => (div.textContent = ''));
         // Check for errors
         if (data.errors) {
           data.errors.forEach((error) => {
             const errorInput = formRef.current.querySelector(
-              `label[for=${error.path}] + .field-error`
+              `label[for=${error.path}] + div`
             );
             errorInput.textContent = error.msg;
           });
@@ -75,18 +75,18 @@ const PostForm = () => {
     <>
       <form className='register-form' ref={formRef} onSubmit={handleSubmit} method='post'>
         <h3>Create Post</h3>
-        <div className='form-row'>
+        <div>
           <label htmlFor='title'>Title:</label>
-          <span className='field-error'></span>
-          <input type='text' name='title' id='title' />
+          <div></div>
+          <input type='text' name='title' id='title' required />
         </div>
-        <div className='form-row'>
+        <div>
           <label htmlFor='body'>Body:</label>
-          <span className='field-error'></span>
-          <textarea name='body' id='body'></textarea>
+          <div></div>
+          <textarea name='body' id='body' required></textarea>
         </div>
 
-        <div className='form-button'>
+        <div>
           <button type='submit'>{id ? 'Update' : 'Create'}</button>
         </div>
       </form>
