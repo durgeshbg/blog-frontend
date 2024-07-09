@@ -59,7 +59,6 @@ const PostForm = () => {
           });
         } else {
           // No errors user created
-          console.log(data);
           navigate('/posts/' + data.post._id);
         }
       })
