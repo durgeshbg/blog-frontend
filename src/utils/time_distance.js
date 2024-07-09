@@ -23,5 +23,7 @@ export default function distance(d1, d2 = new Date(), plural = '') {
   } else if (ss_gap > 0) {
     plural = ss_gap == 1 ? '' : 's';
     return `${ss_gap} second${plural} ago`;
+  } else {
+    return `0 seconds ago`;
   }
 }
