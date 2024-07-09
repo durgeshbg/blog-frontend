@@ -5,7 +5,7 @@ import URL from '../../utils/url';
 import { useState } from 'react';
 import CommentForm from '../Form/CommentForm';
 
-const Comment = ({ comment, token, updateComments }) => {
+const Comment = ({ comment, token, updateComments, postId }) => {
   const [updateform, setUpdateform] = useState(false);
 
   const handleDelete = () => {
@@ -28,6 +28,7 @@ const Comment = ({ comment, token, updateComments }) => {
           token={token}
           updateComments={updateComments}
           setUpdateform={setUpdateform}
+          postId={postId}
         />
       ) : (
         <div className='comment'>
@@ -47,6 +48,7 @@ const Comment = ({ comment, token, updateComments }) => {
 };
 
 Comment.propTypes = {
+  postId: PropTypes.string,
   comment: PropTypes.shape({
     author: PropTypes.bool,
     createdAt: PropTypes.string.isRequired,
