@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { useEffect, useRef } from 'react';
 import URL from '../../utils/url';
 
-const CommentForm = ({ comment, setUpdateform, updateComments, token }) => {
+const CommentForm = ({ comment, postId, setUpdateform, updateComments, token }) => {
   const formRef = useRef(null);
 
   useEffect(() => {
@@ -14,8 +14,8 @@ const CommentForm = ({ comment, setUpdateform, updateComments, token }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const data = new FormData(e.target);
-    fetch(URL + '/posts/' + comment.post + '/comments/' + comment._id, {
-      method: 'PUT',
+    fetch(URL + '/posts/' + postId + '/comments' + (comment ? `/${comment._id}` : ''), {
+      method: comment ? 'PUT' : 'POST',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
@@ -31,10 +31,12 @@ const CommentForm = ({ comment, setUpdateform, updateComments, token }) => {
         if (data.errors) {
           formRef.current.querySelector(`label[for='text'] + span`).textContent =
             data.errors[0].msg;
-          formRef.current.querySelector(`#text`).textContent = data.comment.text;
+          formRef.current.querySelector(`#text`).value = data.comment.text;
         } else {
+          if (comment) {
+            setUpdateform(false);
+          }
           updateComments(data.comment, 'update');
-          setUpdateform(false);
         }
       })
       .catch((err) => console.log(err));
@@ -49,13 +51,14 @@ const CommentForm = ({ comment, setUpdateform, updateComments, token }) => {
           <span></span>
           <input type='text' id='text' name='text' />
         </div>
-        <button type='submit'>Save</button>
+        <button type='submit'>{comment ? 'Save' : 'Post'}</button>
       </form>
     </>
   );
 };
 
 CommentForm.propTypes = {
+  postId: PropTypes.string,
   comment: PropTypes.shape({
     author: PropTypes.bool,
     createdAt: PropTypes.string.isRequired,
