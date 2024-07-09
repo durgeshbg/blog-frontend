@@ -3,6 +3,7 @@ import URL from '../../utils/url';
 import distance from '../../utils/time_distance';
 import { Link, useNavigate, useOutletContext, useParams } from 'react-router-dom';
 import Comment from '../Comment/Comment';
+import CommentForm from '../Form/CommentForm';
 
 const PostDisplay = () => {
   const [token] = useOutletContext();
@@ -96,19 +97,27 @@ const PostDisplay = () => {
           </div>
           <div className='comments'>
             <h3>Comments: </h3>
-            {comments &&
-              (typeof comments === 'object' ? (
-                comments.map((comment) => (
-                  <Comment
-                    updateComments={updateComments}
-                    key={comment._id}
-                    token={token}
-                    comment={comment}
-                  />
-                ))
-              ) : (
-                <div>No comments</div>
-              ))}
+            <div className='comment-form'>
+              <CommentForm
+                postId={post._id}
+                updateComments={updateComments}
+                token={token}
+              />
+            </div>
+            <div className='comments'>
+              {comments &&
+                (typeof comments === 'object'
+                  ? comments.map((comment) => (
+                      <Comment
+                        updateComments={updateComments}
+                        key={comment._id}
+                        token={token}
+                        comment={comment}
+                        postId={post._id}
+                      />
+                    ))
+                  : 'No comments')}
+            </div>
           </div>
         </div>
       )}
