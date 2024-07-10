@@ -45,14 +45,37 @@ const CommentForm = ({ comment, postId, setUpdateform, updateComments, token }) 
 
   return (
     <>
-      <form ref={formRef} onSubmit={handleSubmit} method='post'>
-        <div>
-          <label htmlFor='text'>Comment: </label>
-          <div></div>
-          <input type='text' id='text' name='text' required />
+      <form
+        className='bg-slate-300 my-4 py-8 px-7 rounded-md flex flex-col gap-5'
+        ref={formRef}
+        onSubmit={handleSubmit}
+        method='post'
+      >
+        <div className='flex relative'>
+          <label className='text-2xl mr-2 self-center' htmlFor='text'>
+            Comment:{' '}
+          </label>
+          <div className='text-rose-600 absolute left-28 -top-6 inset-x-0'></div>
+          <input
+            className='bg-slate-200 border border-orange-500 outline-none w-2/5 rounded-sm px-3 py-1 text-2xl'
+            type='text'
+            id='text'
+            name='text'
+          />
         </div>
-        <button type='submit'>{comment ? 'Save' : 'Post'}</button>
-        {comment && <button onClick={() => setUpdateform(false)}>Cancel</button>}
+        <div className='flex justify-start gap-2'>
+          <button className='bg-blue-500 px-3 py-1 rounded-md' type='submit'>
+            {comment ? 'Save' : 'Post'}
+          </button>
+          {comment && (
+            <button
+              className='bg-orange-500 px-3 py-1 rounded-md'
+              onClick={() => setUpdateform(false)}
+            >
+              Cancel
+            </button>
+          )}
+        </div>
       </form>
     </>
   );

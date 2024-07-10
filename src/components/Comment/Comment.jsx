@@ -30,15 +30,17 @@ const Comment = ({ comment, token, updateComments, postId }) => {
           postId={postId}
         />
       ) : (
-        <div className='comment'>
-          <div className='text'>{comment.text}</div>
-          <div className='username'>@{comment.username}</div>
-          <div className='time'>{distance(new Date(comment.updatedAt))}</div>
+        <div className='bg-slate-300 mb-5 px-7 py-4 rounded-md'>
+          <p className='text-2xl'>{comment.text}</p>
+          <p className='italic font-bold'>@{comment.username}</p>
+          <p className='text-orange-500'>{distance(new Date(comment.updatedAt))}</p>
           {comment.author && (
-            <>
-              <button onClick={handleDelete}>Delete</button>
-              <button onClick={() => setUpdateform(true)}>Update</button>
-            </>
+            <div className='flex gap-2'>
+              <button className='bg-rose-500 px-3 py-1 rounded-md' onClick={handleDelete}>
+                Delete
+              </button>
+              <button className='bg-blue-500 px-3 py-1 rounded-md' onClick={() => setUpdateform(true)}>Update</button>
+            </div>
           )}
         </div>
       )}

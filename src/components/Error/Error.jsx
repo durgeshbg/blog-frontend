@@ -4,7 +4,7 @@ const Error = ({ status = 404, message = 'Page not found' }) => {
   return (
     <div className='error'>
       <h1 className='head'>{status}</h1>
-      <h2 className='message'>{message}</h2>
+      <p className='message'>{message}</p>
       <img className='loading-icon' src='/icon.svg' alt='logo' />
     </div>
   );

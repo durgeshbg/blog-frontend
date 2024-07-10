@@ -1,16 +1,18 @@
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 const Header = ({ token, setToken }) => {
   return (
-    <>
-      <h1>Blog</h1>
+    <header className='flex justify-between items-center bg-blue-500 mb-5 tracking-wider'>
+      <h2 className='text-5xl px-3 py-2 font-bold'>
+        <Link to='/'>Blog</Link>
+      </h2>
       <nav>
-        <ul>
-          <li>
-            <Link to='/'>Home</Link>
+        <ul className='flex justify-between gap-2'>
+          <li className='text-lg text-white font-semibold bg-orange-500 px-2 py-1 m-3 rounded'>
+            <NavLink to='/'>Home</NavLink>
           </li>
-          <li>
+          <li className='text-lg text-white font-semibold bg-orange-500 px-2 py-1 m-3 rounded'>
             {token ? (
               <button
                 onClick={() => {
@@ -22,17 +24,17 @@ const Header = ({ token, setToken }) => {
                 Logout
               </button>
             ) : (
-              <Link to='/login'>LogIn/SignUp</Link>
+              <NavLink to='/login'>LogIn/SignUp</NavLink>
             )}
           </li>
           {localStorage.getItem('admin') === 'true' && (
-            <li>
-              <Link to={'/create'}>Create</Link>
+            <li className='text-lg text-white font-semibold bg-orange-500 px-2 py-1 m-3 rounded'>
+              <NavLink to={'/create'}>Create</NavLink>
             </li>
           )}
         </ul>
       </nav>
-    </>
+    </header>
   );
 };
 

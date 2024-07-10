@@ -80,34 +80,64 @@ const PostDisplay = () => {
               post={post}
             />
           ) : (
-            <div>
-              <h1>{post.title}</h1>
-              <div>{post.body}</div>
-              <div>Posted: {distance(new Date(post.createdAt))}</div>
+            <div className='px-8 py-3'>
+              <h1 className='text-center text-6xl mb-6'>{post.title}</h1>
+              <p className='leading-loose tracking-widest px-8 py-3 text-2xl'>
+                {post.body}
+              </p>
               {localStorage.getItem('admin') === 'true' && (
-                <div>
-                  <div>
-                    <button onClick={() => setUpdateForm(true)}>Update</button>
-                  </div>
-                  <div>
-                    <button onClick={() => setConfirm(true)}>Delete</button>
+                <div className='flex flex-col items-center'>
+                  <div className='flex justify-between w-1/5 mb-5'>
+                    <div>
+                      <button
+                        className='bg-blue-500 px-5 py-2 rounded-md'
+                        onClick={() => setUpdateForm(true)}
+                      >
+                        Update
+                      </button>
+                    </div>
+                    <div>
+                      <button
+                        className='bg-rose-500 px-5 py-2 rounded-md'
+                        onClick={() => setConfirm(true)}
+                      >
+                        Delete
+                      </button>
+                    </div>
                   </div>
 
                   <div>
                     {confirm && (
-                      <>
-                        <div>Would you like to really delete?</div>
-                        <button onClick={handleDelete}>Yes</button>
-                        <button onClick={() => setConfirm(false)}>No</button>
-                      </>
+                      <div className='flex flex-col justify-center mb-5'>
+                        <p className='font-bold text-lg'>
+                          Would you like to really delete?
+                        </p>
+                        <div className='flex justify-center gap-4'>
+                          <button
+                            className='bg-rose-500 px-5 py-2 rounded-md'
+                            onClick={handleDelete}
+                          >
+                            Yes
+                          </button>
+                          <button
+                            className='bg-green-500 px-5 py-2 rounded-md'
+                            onClick={() => setConfirm(false)}
+                          >
+                            No
+                          </button>
+                        </div>
+                      </div>
                     )}
                   </div>
                 </div>
               )}
+              <p className='text-center bg-orange-500 text-2xl px-8 py-3'>
+                Posted: {distance(new Date(post.createdAt))}
+              </p>
             </div>
           )}
           <div className='comments'>
-            <h3>Comments: </h3>
+            <h2 className='text-3xl px-8' >Comments: </h2>
             <div>
               <CommentForm
                 postId={post._id}
@@ -115,7 +145,7 @@ const PostDisplay = () => {
                 token={token}
               />
             </div>
-            <div className='comments'>
+            <div className='flex flex-col px-8 mb-9'>
               {comments &&
                 (typeof comments === 'object'
                   ? comments.map((comment) => (

@@ -69,26 +69,56 @@ const PostForm = ({ setPost, setUpdateForm, tokenFromUpdate, post }) => {
   if (!token || localStorage.getItem('admin') === 'false') return <Navigate to={'/'} />;
 
   return (
-    <>
-      <form className='register-form' ref={formRef} onSubmit={handleSubmit} method='post'>
-        <h3>Create Post</h3>
-        <div>
-          <label htmlFor='title'>Title:</label>
-          <div></div>
-          <input type='text' name='title' id='title' required />
+    <div className='border-x mx-auto w-2/3'>
+      <h1 className='bg-orange-500 rounded-t py-4 text-5xl text-center'>
+        {post ? 'Update' : 'Create'} Post
+      </h1>
+      <form
+        className='px-7 py-11 relative'
+        ref={formRef}
+        onSubmit={handleSubmit}
+        method='post'
+      >
+        <div className='flex justify-between items-baseline mb-8 relative'>
+          <label className='text-2xl font-bold' htmlFor='title'>
+            Title:
+          </label>
+          <div className='text-rose-600 absolute text-center -top-7 inset-x-0'></div>
+          <input
+            className='bg-slate-200 border border-green-500 invalid:border-rose-500 outline-none w-5/6 rounded-sm px-2 py-1 text-2xl'
+            type='text'
+            name='title'
+            id='title'
+          />
         </div>
-        <div>
-          <label htmlFor='body'>Body:</label>
-          <div></div>
-          <textarea name='body' id='body' required></textarea>
+        <div className='flex justify-between items-baseline mb-8 relative'>
+          <label className='text-2xl font-bold' htmlFor='body'>
+            Body:
+          </label>
+          <div className='text-rose-600 absolute text-center -top-7 inset-x-0'></div>
+          <textarea
+            className='resize-y bg-slate-200 border border-green-500 invalid:border-rose-500 outline-none w-5/6 rounded-sm px-2 py-1 text-2xl'
+            name='body'
+            id='body'
+            rows={10}
+          ></textarea>
         </div>
 
-        <div>
-          <button type='submit'>{post ? 'Update' : 'Create'}</button>
-          {post && <button onClick={() => setUpdateForm(false)}>Cancel</button>}
+        <div className='flex gap-2'>
+          <button className='bg-blue-500 rounded px-5 py-2 font-bold' type='submit'>
+            {post ? 'Update' : 'Create'}
+          </button>
+          {post && (
+            <button
+              className='bg-orange-500 rounded px-5 py-2 font-bold'
+              onClick={() => setUpdateForm(false)}
+            >
+              Cancel
+            </button>
+          )}
         </div>
       </form>
-    </>
+    </div>
   );
 };
 

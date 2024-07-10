@@ -41,28 +41,51 @@ const Login = () => {
   if (token) return <Navigate to={'/'} />;
 
   return (
-    <>
-      <form className='login-form' onSubmit={handleLogin} method='post'>
-        <h3>Login!</h3>
-        {error && <div>{error}</div>}
-        <div>
-          <label htmlFor='username'>Username:</label>
-          <input type='text' name='username' id='username' required />
+    <div className='border-x mx-auto w-1/3'>
+      <h1 className='bg-orange-500 rounded-t py-4 text-5xl text-center'>Login!</h1>
+      <form className='px-7 py-11 relative' onSubmit={handleLogin} method='post'>
+        {error && (
+          <div className='text-rose-600 absolute left-44 top-2 inset-x-0'>{error}!</div>
+        )}
+        <div className='flex justify-between items-baseline mb-8'>
+          <label className='text-2xl font-bold' htmlFor='username'>
+            Username:
+          </label>
+          <input
+            className='bg-slate-200 border border-green-500 invalid:border-rose-500 outline-none w-2/3 rounded-sm px-2 py-1 text-2xl'
+            type='text'
+            name='username'
+            id='username'
+            required
+          />
         </div>
-        <div>
-          <label htmlFor='password'>Password:</label>
-          <input type='password' name='password' id='password' required />
+        <div className='flex justify-between items-baseline mb-8'>
+          <label className='text-2xl font-bold' htmlFor='password'>
+            Password:
+          </label>
+          <input
+            className='bg-slate-200 border border-green-500 invalid:border-rose-500 outline-none w-2/3 rounded-sm px-2 py-1 text-2xl'
+            type='password'
+            name='password'
+            id='password'
+            required
+          />
         </div>
 
-        <div>
-          <button type='submit'>Log In</button>
+        <div className='text-center'>
+          <button className='bg-orange-500 rounded px-5 py-2 font-bold' type='submit'>
+            Log In
+          </button>
         </div>
       </form>
 
-      <div>
-        Don&apos;t have an account, <Link to='/register'>Register</Link>
-      </div>
-    </>
+      <p className='bg-orange-500 rounded-b text-center'>
+        Don&apos;t have an account,{' '}
+        <Link className='hover:underline text-violet-500' to='/register'>
+          Register
+        </Link>
+      </p>
+    </div>
   );
 };
 

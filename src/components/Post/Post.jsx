@@ -5,12 +5,15 @@ import { Link } from 'react-router-dom';
 const Post = ({ post }) => {
   const createdTime = new Date(post.createdAt);
   return (
-    <Link className='post' to={'/posts/' + post._id}>
-      <div>
-        <div className='title'>{post.title}</div>
-        <div className='body'>{post.body}</div>
-        <div className='time'>Posted: {distance(createdTime)}</div>
-      </div>
+    <Link
+      className='border-2 border-blue-500 max-w-3xl px-5 py-5 rounded'
+      to={'/posts/' + post._id}
+    >
+      <h3 className='bg-orange-600 text-4xl text-center'>{post.title}</h3>
+      <p className='line-clamp-5 leading-8 px-3 hover:text-orange-500'>{post.body}</p>
+      <p className='text-left font-bold text-orange-600 px-3'>
+        Posted: {distance(createdTime)}
+      </p>
     </Link>
   );
 };
