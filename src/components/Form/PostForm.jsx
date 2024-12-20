@@ -69,48 +69,49 @@ const PostForm = ({ setPost, setUpdateForm, tokenFromUpdate, post }) => {
   if (!token || localStorage.getItem('admin') === 'false') return <Navigate to={'/'} />;
 
   return (
-    <div className='border-x mx-auto w-2/3'>
-      <h1 className='bg-orange-500 rounded-t py-4 text-5xl text-center'>
-        {post ? 'Update' : 'Create'} Post
-      </h1>
+    <div className='mx-auto bg-blue-ribbon-200 flex flex-col items-center gap-5 p-4 m-3 rounded-md md:w-10/12 lg:w-8/12 xl:w-6/12'>
+      <h1 className='text-xl'>{post ? 'Update' : 'Create'} Post</h1>
       <form
-        className='px-7 py-11 relative'
+        className='flex flex-col w-full gap-5'
         ref={formRef}
         onSubmit={handleSubmit}
         method='post'
       >
-        <div className='flex justify-between items-baseline mb-8 relative'>
-          <label className='text-2xl font-bold' htmlFor='title'>
+        <div className='w-full relative'>
+          <label className='font-bold' htmlFor='title'>
             Title:
           </label>
-          <div className='text-rose-600 absolute text-center -top-7 inset-x-0'></div>
+          <div className='text-rose-500 absolute -top-4 right-0 text-sm'></div>
           <input
-            className='bg-slate-200 border border-green-500 invalid:border-rose-500 outline-none w-5/6 rounded-sm px-2 py-1 text-2xl'
+            className='px-3 py-2 w-full rounded-md border-2 border-black-100 focus-within:outline-black-500'
             type='text'
             name='title'
             id='title'
           />
         </div>
-        <div className='flex justify-between items-baseline mb-8 relative'>
-          <label className='text-2xl font-bold' htmlFor='body'>
+        <div className='w-full relative'>
+          <label className='font-bold' htmlFor='body'>
             Body:
           </label>
-          <div className='text-rose-600 absolute text-center -top-7 inset-x-0'></div>
+          <div className='text-rose-500 absolute -top-4 right-0 text-sm'></div>
           <textarea
-            className='resize-y bg-slate-200 border border-green-500 invalid:border-rose-500 outline-none w-5/6 rounded-sm px-2 py-1 text-2xl'
+            className='px-3 py-2 w-full rounded-md border-2 border-black-100 focus-within:outline-black-500'
             name='body'
             id='body'
             rows={10}
           ></textarea>
         </div>
 
-        <div className='flex gap-2'>
-          <button className='bg-blue-500 rounded px-5 py-2 font-bold' type='submit'>
+        <div className='self-center flex items-baseline gap-5'>
+          <button
+            className='bg-blue-ribbon-500 text-white rounded-sm px-2 py-1 md:px-4 md:py-2 lg:mr-5 lg:ml-auto hover:bg-blue-ribbon-400 transition-colors mb-4'
+            type='submit'
+          >
             {post ? 'Update' : 'Create'}
           </button>
           {post && (
             <button
-              className='bg-orange-500 rounded px-5 py-2 font-bold'
+              className='text-solid-pink-500 px-2 md:px-4 md:py-2 hover:underline'
               onClick={() => setUpdateForm(false)}
             >
               Cancel

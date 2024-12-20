@@ -3,16 +3,25 @@ import PropTypes from 'prop-types';
 
 const Header = ({ token, setToken }) => {
   return (
-    <header className='flex justify-between items-center bg-blue-500 mb-5 tracking-wider'>
-      <h2 className='text-5xl px-3 py-2 font-bold'>
+    <header className='flex justify-between items-baseline py-3 px-2'>
+      <h2 className='text-2xl md:text-5xl font-bold text-blue-600'>
         <Link to='/'>Blog</Link>
       </h2>
       <nav>
-        <ul className='flex justify-between gap-2'>
-          <li className='text-lg text-white font-semibold bg-orange-500 px-2 py-1 m-3 rounded'>
-            <NavLink to='/'>Home</NavLink>
+        <ul className='flex gap-5 items-baseline'>
+          <li className='md:text-xl'>
+            <NavLink
+              to='/'
+              className={({ isActive }) =>
+                isActive
+                  ? 'underline underline-offset-4 decoration-4 font-bold text-blue-ribbon-500'
+                  : ''
+              }
+            >
+              Home
+            </NavLink>
           </li>
-          <li className='text-lg text-white font-semibold bg-orange-500 px-2 py-1 m-3 rounded'>
+          <li className='md:text-xl'>
             {token ? (
               <button
                 onClick={() => {
@@ -24,12 +33,30 @@ const Header = ({ token, setToken }) => {
                 Logout
               </button>
             ) : (
-              <NavLink to='/login'>LogIn/SignUp</NavLink>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive
+                    ? 'underline underline-offset-4 decoration-4 font-bold text-blue-ribbon-500'
+                    : ''
+                }
+                to='/login'
+              >
+                LogIn/SignUp
+              </NavLink>
             )}
           </li>
           {localStorage.getItem('admin') === 'true' && (
-            <li className='text-lg text-white font-semibold bg-orange-500 px-2 py-1 m-3 rounded'>
-              <NavLink to={'/create'}>Create</NavLink>
+            <li className='md:text-xl'>
+              <NavLink
+                to={'/create'}
+                className={({ isActive }) =>
+                  isActive
+                    ? 'underline underline-offset-4 decoration-4 font-bold text-blue-ribbon-500'
+                    : ''
+                }
+              >
+                Create
+              </NavLink>
             </li>
           )}
         </ul>

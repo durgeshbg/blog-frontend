@@ -46,30 +46,33 @@ const CommentForm = ({ comment, postId, setUpdateform, updateComments, token }) 
   return (
     <>
       <form
-        className='bg-slate-300 my-4 py-8 px-7 rounded-md flex flex-col gap-5'
+        className='max-w-screen-sm px-2 py-1 mx-auto'
         ref={formRef}
         onSubmit={handleSubmit}
         method='post'
       >
-        <div className='flex relative'>
-          <label className='text-2xl mr-2 self-center' htmlFor='text'>
+        <div className='flex items-center'>
+          <label className='mr-2 font-bold' htmlFor='text'>
             Comment:{' '}
           </label>
-          <div className='text-rose-600 absolute left-28 -top-6 inset-x-0'></div>
+          <div className=''></div>
           <input
-            className='bg-slate-200 border border-orange-500 outline-none w-2/5 rounded-sm px-3 py-1 text-2xl'
+            className='px-3 py-2 w-full rounded-md border-2 border-black-100 focus-within:outline-black-500'
             type='text'
             id='text'
             name='text'
           />
         </div>
-        <div className='flex justify-start gap-2'>
-          <button className='bg-blue-500 px-3 py-1 rounded-md' type='submit'>
+        <div className='flex mt-2 gap-5 justify-end mr-1'>
+          <button
+            className='bg-blue-ribbon-500 text-white rounded-sm px-2 py-1 md:px-4 md:py-2 lg:mr-5 lg:ml-auto hover:bg-blue-ribbon-400 transition-colors'
+            type='submit'
+          >
             {comment ? 'Save' : 'Post'}
           </button>
           {comment && (
             <button
-              className='bg-orange-500 px-3 py-1 rounded-md'
+              className='text-solid-pink-500 hover:underline'
               onClick={() => setUpdateform(false)}
             >
               Cancel

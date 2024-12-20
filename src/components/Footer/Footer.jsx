@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 const Footer = () => {
   return (
     <>
-      <footer className='flex justify-center font-bold bg-blue-500 text-blue-50 rounded-b-md w-full fixed bottom-0 tracking-wider'>
-        <p>
+      <footer className='text-black-500 text-xs mb-2 flex justify-end mr-2 mt-2'>
+        <p className='bg-black-200 px-2'>
           Copyright &copy; 2024{' '}
           <Link
-            className='hover:underline text-slate-900 underline-offset-3'
+            className='underline decoration-4 underline-offset-4 decoration-shakespeare-400 hover:decoration-blue-ribbon-500'
             to='https://github.com/durgeshbg/blog-frontend'
             target='_blank'
           >

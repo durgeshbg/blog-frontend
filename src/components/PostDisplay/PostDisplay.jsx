@@ -80,64 +80,56 @@ const PostDisplay = () => {
               post={post}
             />
           ) : (
-            <div className='px-8 py-3'>
-              <h1 className='text-center text-6xl mb-6'>{post.title}</h1>
-              <p className='leading-loose tracking-widest px-8 py-3 text-2xl'>
-                {post.body}
-              </p>
+            <div className='m-3 lg:mx-auto p-3 px-5 rounded-sm bg-blue-ribbon-100 lg:w-9/12'>
+              <h1 className='text-blue-ribbon-500 font-bold text-xl md:text-2xl mb-5 '>
+                {post.title}
+              </h1>
+              <p className='leading-7 mb-5 md:text-xl md:leading-6'>{post.body}</p>
               {localStorage.getItem('admin') === 'true' && (
-                <div className='flex flex-col items-center'>
-                  <div className='flex justify-between w-1/5 mb-5'>
-                    <div>
-                      <button
-                        className='bg-blue-500 px-5 py-2 rounded-md'
-                        onClick={() => setUpdateForm(true)}
-                      >
-                        Update
-                      </button>
-                    </div>
-                    <div>
-                      <button
-                        className='bg-rose-500 px-5 py-2 rounded-md'
-                        onClick={() => setConfirm(true)}
-                      >
-                        Delete
-                      </button>
-                    </div>
+                <div className=''>
+                  <div className='self-center flex items-baseline gap-5'>
+                    <button
+                      className='bg-blue-ribbon-500 text-white rounded-sm px-2 py-1 md:px-4 md:py-2 lg:mr-5 lg:ml-auto hover:bg-blue-ribbon-400 transition-colors mb-4'
+                      onClick={() => setUpdateForm(true)}
+                    >
+                      Update
+                    </button>
+                    <button
+                      className='text-solid-pink-500 px-2 md:px-4 md:py-2 hover:underline'
+                      onClick={() => setConfirm(true)}
+                    >
+                      Delete
+                    </button>
                   </div>
 
-                  <div>
-                    {confirm && (
-                      <div className='flex flex-col justify-center mb-5'>
-                        <p className='font-bold text-lg'>
-                          Would you like to really delete?
-                        </p>
-                        <div className='flex justify-center gap-4'>
-                          <button
-                            className='bg-rose-500 px-5 py-2 rounded-md'
-                            onClick={handleDelete}
-                          >
-                            Yes
-                          </button>
-                          <button
-                            className='bg-green-500 px-5 py-2 rounded-md'
-                            onClick={() => setConfirm(false)}
-                          >
-                            No
-                          </button>
-                        </div>
+                  {confirm && (
+                    <div className='flex flex-col'>
+                      <p className='text-center mb-2'>Would you like to really delete?</p>
+                      <div className='self-center flex items-baseline gap-5'>
+                        <button
+                          className='text-solid-pink-500 px-2 md:px-4 md:py-2 hover:underline'
+                          onClick={handleDelete}
+                        >
+                          Yes
+                        </button>
+                        <button
+                          className='bg-blue-ribbon-500 text-white rounded-sm px-2 py-1 md:px-4 md:py-2 lg:mr-5 lg:ml-auto hover:bg-blue-ribbon-400 transition-colors mb-4'
+                          onClick={() => setConfirm(false)}
+                        >
+                          No
+                        </button>
                       </div>
-                    )}
-                  </div>
+                    </div>
+                  )}
                 </div>
               )}
-              <p className='text-center bg-orange-500 text-2xl px-8 py-3'>
+              <p className='font-extralight ml-auto text-sm md:text-base'>
                 Posted: {distance(new Date(post.createdAt))}
               </p>
             </div>
           )}
-          <div className='comments'>
-            <h2 className='text-3xl px-8' >Comments: </h2>
+          <div className='m-3'>
+            <h2 className='text-blue-ribbon-500 font-bold lg:text-center'>Comments: </h2>
             <div>
               <CommentForm
                 postId={post._id}
@@ -145,7 +137,7 @@ const PostDisplay = () => {
                 token={token}
               />
             </div>
-            <div className='flex flex-col px-8 mb-9'>
+            <div className=''>
               {comments &&
                 (typeof comments === 'object'
                   ? comments.map((comment) => (

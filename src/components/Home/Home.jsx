@@ -25,8 +25,8 @@ const Home = () => {
 
   return (
     <>
-      <h1 className='text-5xl text-center mb-5'>Posts</h1>
-      <div className='mb-9 flex flex-wrap justify-center gap-5'>
+      <h1 className='text-center text-xl mb-5'>Posts</h1>
+      <div className='flex flex-col gap-5 items-center'>
         {posts &&
           (typeof posts === 'object'
             ? posts.map((post) => <Post key={post._id} post={post} />)

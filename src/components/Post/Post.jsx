@@ -6,14 +6,12 @@ const Post = ({ post }) => {
   const createdTime = new Date(post.createdAt);
   return (
     <Link
-      className='border-2 border-blue-500 max-w-3xl px-5 py-5 rounded'
+      className='w-11/12 md:w-10/12 lg:w-8/12 xl:w-6/12 bg-blue-ribbon-200 p-3 rounded-md'
       to={'/posts/' + post._id}
     >
-      <h3 className='bg-orange-600 text-4xl text-center'>{post.title}</h3>
-      <p className='line-clamp-5 leading-8 px-3 hover:text-orange-500'>{post.body}</p>
-      <p className='text-left font-bold text-orange-600 px-3'>
-        Posted: {distance(createdTime)}
-      </p>
+      <h3 className='text-2xl text-center tracking-wide'>{post.title}</h3>
+      <p className='h-24 overflow-hidden mb-5'>{post.body}</p>
+      <p className='font-thin'>Posted: {distance(createdTime)}</p>
     </Link>
   );
 };

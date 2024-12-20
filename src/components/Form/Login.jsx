@@ -41,30 +41,28 @@ const Login = () => {
   if (token) return <Navigate to={'/'} />;
 
   return (
-    <div className='border-x mx-auto w-1/3'>
-      <h1 className='bg-orange-500 rounded-t py-4 text-5xl text-center'>Login!</h1>
-      <form className='px-7 py-11 relative' onSubmit={handleLogin} method='post'>
-        {error && (
-          <div className='text-rose-600 absolute left-44 top-2 inset-x-0'>{error}!</div>
-        )}
-        <div className='flex justify-between items-baseline mb-8'>
-          <label className='text-2xl font-bold' htmlFor='username'>
+    <div className='bg-blue-ribbon-100 w-10/12 p-3 md:w-7/12 lg:w-5/12 xl:w-4/12 rounded-md mx-auto m-2'>
+      <h1 className='text-center text-xl mb-5'>Login</h1>
+      <form className='w-full flex flex-col gap-3' onSubmit={handleLogin} method='post'>
+        {error && <div className='text-rose-500 mx-auto'>{error}!</div>}
+        <div className='flex justify-between items-center w-11/12 mx-auto'>
+          <label className='font-bold' htmlFor='username'>
             Username:
           </label>
           <input
-            className='bg-slate-200 border border-green-500 invalid:border-rose-500 outline-none w-2/3 rounded-sm px-2 py-1 text-2xl'
+            className='px-3 py-2 w-8/12 rounded-md border-2 border-black-100 focus-within:outline-black-500'
             type='text'
             name='username'
             id='username'
             required
           />
         </div>
-        <div className='flex justify-between items-baseline mb-8'>
-          <label className='text-2xl font-bold' htmlFor='password'>
+        <div className='flex justify-between items-center w-11/12 mx-auto'>
+          <label className='font-bold' htmlFor='password'>
             Password:
           </label>
           <input
-            className='bg-slate-200 border border-green-500 invalid:border-rose-500 outline-none w-2/3 rounded-sm px-2 py-1 text-2xl'
+            className='px-3 py-2 w-8/12 rounded-md border-2 border-black-100 focus-within:outline-black-500'
             type='password'
             name='password'
             id='password'
@@ -72,16 +70,22 @@ const Login = () => {
           />
         </div>
 
-        <div className='text-center'>
-          <button className='bg-orange-500 rounded px-5 py-2 font-bold' type='submit'>
+        <div className='self-center'>
+          <button
+            className='bg-blue-ribbon-500 text-white rounded-sm px-2 py-1 md:px-4 md:py-2 lg:mr-5 lg:ml-auto hover:bg-blue-ribbon-400 transition-colors mb-4'
+            type='submit'
+          >
             Log In
           </button>
         </div>
       </form>
 
-      <p className='bg-orange-500 rounded-b text-center'>
+      <p className='text-black-500 tracking-wide flex justify-end'>
         Don&apos;t have an account,{' '}
-        <Link className='hover:underline text-violet-500' to='/register'>
+        <Link
+          className='text-black-700 underline underline-offset-4 hover:text-black-950 decoration-blue-ribbon-600 decoration-4 '
+          to='/register'
+        >
           Register
         </Link>
       </p>

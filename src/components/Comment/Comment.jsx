@@ -20,7 +20,7 @@ const Comment = ({ comment, token, updateComments, postId }) => {
     }
   };
   return (
-    <>
+    <div className='mb-3 mx-2 bg-blue-ribbon-100 p-5 max-w-1/4 md:w-8/12 md:mx-auto rounded-sm'>
       {updateform ? (
         <CommentForm
           comment={comment}
@@ -30,21 +30,33 @@ const Comment = ({ comment, token, updateComments, postId }) => {
           postId={postId}
         />
       ) : (
-        <div className='bg-slate-300 mb-5 px-7 py-4 rounded-md'>
-          <p className='text-2xl'>{comment.text}</p>
-          <p className='italic font-bold'>@{comment.username}</p>
-          <p className='text-orange-500'>{distance(new Date(comment.updatedAt))}</p>
+        <>
+          <p className='mb-2 md:text-xl'>{comment.text}</p>
+          <p className='text-black-500 ml-auto text-sm italic md:text-base'>
+            @{comment.username}
+          </p>
+          <p className='text-black-500 text-sm md:text-base'>
+            {distance(new Date(comment.updatedAt))}
+          </p>
           {comment.author && (
-            <div className='flex gap-2'>
-              <button className='bg-rose-500 px-3 py-1 rounded-md' onClick={handleDelete}>
+            <div className='flex mt-5 md:text-base'>
+              <button
+                className='mr-auto bg-blue-ribbon-500 text-white rounded-sm px-2 py-1 md:px-4 md:py-2 lg:mr-5 lg:ml-auto hover:bg-blue-ribbon-400 transition-colors'
+                onClick={() => setUpdateform(true)}
+              >
+                Update
+              </button>
+              <button
+                className='text-solid-pink-500 px-2 md:px-4 md:py-2 hover:underline'
+                onClick={handleDelete}
+              >
                 Delete
               </button>
-              <button className='bg-blue-500 px-3 py-1 rounded-md' onClick={() => setUpdateform(true)}>Update</button>
             </div>
           )}
-        </div>
+        </>
       )}
-    </>
+    </div>
   );
 };
 

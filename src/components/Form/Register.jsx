@@ -57,81 +57,86 @@ const Register = () => {
   };
   if (token) return <Navigate to={'/'} />;
   return (
-    <div className='border-x mx-auto w-2/4 mb-9'>
-      <h1 className='bg-orange-500 rounded-t py-4 text-5xl text-center'>Sign Up!</h1>
-      <form className='px-7 py-11' ref={formRef} onSubmit={handleRegister} method='post'>
-        <div className='flex justify-between items-baseline mb-10 relative'>
-          <label className='text-2xl font-bold relative' htmlFor='firstname'>
+    <div className='bg-blue-ribbon-100 w-10/12 p-3 md:w-7/12 lg:w-5/12 xl:w-4/12 rounded-md mx-auto m-2'>
+      <h1 className='text-center text-xl mb-5'>Sign Up</h1>
+      <form
+        className='w-full flex flex-col gap-5'
+        ref={formRef}
+        onSubmit={handleRegister}
+        method='post'
+      >
+        <div className='flex justify-between items-center w-11/12 mx-auto relative'>
+          <label className='font-bold' htmlFor='firstname'>
             First name:
           </label>
-          <div className='text-rose-600 absolute left-1/3 -top-8 inset-x-0'></div>
+          <div className='text-rose-500 absolute -top-4 right-0 text-sm'></div>
           <input
-            className='bg-slate-200 border border-green-500 invalid:border-rose-500 outline-none w-2/3 rounded-sm px-2 py-1 text-2xl'
+            className='px-3 py-2 w-8/12 rounded-md border-2 border-black-100 focus-within:outline-black-500'
             type='text'
             name='firstname'
             id='firstname'
             required
           />
         </div>
-        <div className='flex justify-between items-baseline mb-10 relative'>
-          <label className='text-2xl font-bold' htmlFor='lastname'>
+        <div className='flex justify-between items-center w-11/12 mx-auto relative'>
+          <label className='font-bold' htmlFor='lastname'>
             Last name:
           </label>
-          <div className='text-rose-600 absolute left-1/3 -top-8 inset-x-0'></div>
+          <div className='text-rose-500 absolute -top-4 right-0 text-sm'></div>
           <input
-            className='bg-slate-200 border border-green-500 invalid:border-rose-500 outline-none w-2/3 rounded-sm px-2 py-1 text-2xl'
+            className='px-3 py-2 w-8/12 rounded-md border-2 border-black-100 focus-within:outline-black-500'
             type='text'
             name='lastname'
             id='lastname'
             required
           />
         </div>
-        <div className='flex justify-between items-baseline mb-10 relative'>
-          <label className='text-2xl font-bold' htmlFor='email'>
+        <div className='flex justify-between items-center w-11/12 mx-auto relative'>
+          <label className='font-bold' htmlFor='email'>
             Email:
           </label>
-          <div className='text-rose-600 absolute left-1/3 -top-8 inset-x-0'></div>
+          <div className='text-rose-500 absolute -top-4 right-0 text-sm'></div>
           <input
-            className='bg-slate-200 border border-green-500 invalid:border-rose-500 outline-none w-2/3 rounded-sm px-2 py-1 text-2xl'
+            className='px-3 py-2 w-8/12 rounded-md border-2 border-black-100 focus-within:outline-black-500'
             type='email'
             name='email'
             id='email'
             required
           />
         </div>
-        <div className='flex justify-between items-baseline mb-10 relative'>
-          <label className='text-2xl font-bold' htmlFor='username'>
+        <div className='flex justify-between items-center w-11/12 mx-auto relative'>
+          <label className='font-bold' htmlFor='username'>
             Username:
           </label>
-          <div className='text-rose-600 absolute left-1/3 -top-8 inset-x-0'></div>
+          <div className='text-rose-500 absolute -top-4 right-0 text-sm'></div>
           <input
-            className='bg-slate-200 border border-green-500 invalid:border-rose-500 outline-none w-2/3 rounded-sm px-2 py-1 text-2xl'
+            className='px-3 py-2 w-8/12 rounded-md border-2 border-black-100 focus-within:outline-black-500'
             type='text'
             name='username'
             id='username'
             required
           />
         </div>
-        <div className='flex justify-between items-baseline mb-10 relative'>
-          <label className='text-2xl font-bold' htmlFor='password'>
+        <div className='flex justify-between items-center w-11/12 mx-auto relative'>
+          <label className='font-bold' htmlFor='password'>
             Password:
           </label>
-          <div className='text-rose-600 absolute left-1/3 -top-8 inset-x-0'></div>
+          <div className='text-rose-500 absolute -top-4 right-0 text-sm'></div>
           <input
-            className='bg-slate-200 border border-green-500 invalid:border-rose-500 outline-none w-2/3 rounded-sm px-2 py-1 text-2xl'
+            className='px-3 py-2 w-8/12 rounded-md border-2 border-black-100 focus-within:outline-black-500'
             type='password'
             name='password'
             id='password'
             required
           />
         </div>
-        <div className='flex justify-between items-baseline mb-10 relative'>
-          <label className='text-2xl font-bold' htmlFor='cpassword'>
-            Confirm Password:
+        <div className='flex justify-between items-center w-11/12 mx-auto relative'>
+          <label className='font-bold' htmlFor='cpassword'>
+            Confirm <br /> Password:
           </label>
-          <div className='text-rose-600 absolute left-1/3 -top-8 inset-x-0'></div>
+          <div className='text-rose-500 absolute -top-4 right-0 text-sm'></div>
           <input
-            className='bg-slate-200 border border-green-500 invalid:border-rose-500 outline-none w-2/3 rounded-sm px-2 py-1 text-2xl'
+            className='px-3 py-2 w-8/12 rounded-md border-2 border-black-100 focus-within:outline-black-500'
             type='password'
             name='cpassword'
             id='cpassword'
@@ -139,9 +144,9 @@ const Register = () => {
           />
         </div>
 
-        <div className='text-center'>
+        <div className='self-center'>
           <button
-            className='bg-blue-500 text-black-500 active:bg-orange-500 px-5 py-2 font-bold rounded'
+            className='bg-blue-ribbon-500 text-white rounded-sm px-2 py-1 md:px-4 md:py-2 lg:mr-5 lg:ml-auto hover:bg-blue-ribbon-400 transition-colors mb-4'
             type='submit'
           >
             Register
@@ -149,9 +154,12 @@ const Register = () => {
         </div>
       </form>
 
-      <p className='bg-orange-500 rounded-b text-center'>
+      <p className='text-black-500 tracking-wide flex justify-end'>
         Already have an account,{' '}
-        <Link className='hover:underline text-violet-500' to='/login'>
+        <Link
+          className='text-black-700 underline underline-offset-4 hover:text-black-950 decoration-blue-ribbon-600 decoration-4 '
+          to='/login'
+        >
           Login
         </Link>
       </p>
